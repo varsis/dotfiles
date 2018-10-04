@@ -15,12 +15,9 @@ let g:ycm_show_diagnostics_ui=0
 let g:ycm_add_preview_to_completeopt=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_autoclose_preview_window_after_completion=0
+set completeopt-=preview
 
-autocmd FileType typescript setlocal completeopt+=menu,preview
-
-" This is similar to you complete me...
-" Plugin 'davidhalter/jedi-vim'
-
+" Autocomplete quotes, brackets, ect..
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'rhysd/conflict-marker.vim'
 Plugin 'tpope/vim-surround'
@@ -288,8 +285,11 @@ nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>r :Tags<CR>
 
+let g:ale_completion_enabled = 1
+
 let g:javascript_plugin_jsdoc = 1
-autocmd FileType typescript setlocal omnifunc=ale#completion#OmniFunc
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss,sass set iskeyword+=-

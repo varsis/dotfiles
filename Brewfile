@@ -24,6 +24,7 @@ brew 'unrar'
 brew 'wget'
 brew 'yarn'
 brew 'youtube-dl'
+brew 'fzf'
 
 cask '1password'
 cask 'adium'

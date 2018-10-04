@@ -1,4 +1,6 @@
 # Local Env
-source ~/.env
+if [ -f ~/.env ]; then
+  source ~/.env
+fi;
 
 export EDITOR='vim'

@@ -15,7 +15,7 @@ let g:ycm_show_diagnostics_ui=0
 let g:ycm_add_preview_to_completeopt=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_autoclose_preview_window_after_completion=0
-set completeopt-=preview
+set completeopt=noselect,menuone,preview
 
 " Autocomplete quotes, brackets, ect..
 Plugin 'HerringtonDarkholme/yats.vim'
@@ -72,8 +72,10 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'typescript': ['tslint', 'remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
+\   'typescript': ['tslint', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\   'css': ['prettier'],
+\   'scss': ['prettier'],
 \}
 
 " File Browser

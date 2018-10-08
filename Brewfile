@@ -25,6 +25,7 @@ brew 'wget'
 brew 'yarn'
 brew 'youtube-dl'
 brew 'fzf'
+brew 'n'
 
 cask '1password'
 cask 'adium'

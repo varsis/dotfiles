@@ -127,6 +127,7 @@ autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()
 
 " Allow moving on columns tmux
 set ttymouse=sgr
+set shellcmdflag=-lc
 
 " Disable Column, speed up navigation
 " let g:syntastic_cursor_column = 0

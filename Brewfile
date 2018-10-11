@@ -2,6 +2,7 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 tap 'puma/puma'
+tap 'caskroom/cask'
 
 brew 'ack'
 brew 'coreutils'
@@ -41,3 +42,4 @@ cask 'slack'
 cask 'steam'
 cask 'tunnelbear'
 cask 'vlc'
+cask 'google-cloud-sdk'

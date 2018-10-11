@@ -653,6 +653,10 @@ endfunction
         nnoremap <C-L> <C-W><C-L>
         nnoremap <C-H> <C-W><C-H>
 
+" ALE Errors
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
+
 
 if !exists("g:ycm_semantic_triggers")
   let g:ycm_semantic_triggers =  {

@@ -26,6 +26,7 @@ brew 'yarn'
 brew 'youtube-dl'
 brew 'fzf'
 brew 'n'
+brew 'mongodb'
 
 cask '1password'
 cask 'adium'

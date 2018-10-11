@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# Code Test
+#
+# `Code Test` handles creating a code test
+
+set -e
+
+displayUsageAndExit() {
+	echo "code-test -- Code Test Management Script"
+	echo ""
+	echo "Usage: code-test -r REPO -d DURATION -n NAME"
+	echo ""
+	echo "Options:"
+	echo "  -r, --repo      Specify the repo the code test will connect with"
+	echo "  -d, --duration  How long the timer will run on the test"
+	echo "  -n, --name      Name of the Candidate"
+	echo "  -h, --help      Show this help message and exit"
+	exit
+}
+
+while test $# -gt 0; do
+	case "$1" in
+		"-h"|"--help")
+			displayUsageAndExit
+			;;
+		"-r"|"--repo")
+      shift
+      REPO=$1
+			;;
+    "-d"|"--duration")
+      shift
+      DURATION=$1
+			;;
+    "-n"|"--name")
+      shift
+      NAME=$1
+			;;
+		*)
+			echo "Invalid option: $1"
+			displayUsageAndExit
+			;;
+	esac
+	shift
+done
+
+REQUIRED_ARGS=(CODE_TEST_HOST CODE_TEST_USER CODE_TEST_PASSWORD REPO DURATION NAME)
+
+EXIT_CODE=0
+for ENV_VAR in "${REQUIRED_ARGS[@]}"
+do
+  if [[ -z ${!ENV_VAR} ]]; then
+    echo "Missing ENV or REQUIRD OPTION: $ENV_VAR"
+    EXIT_CODE=1
+    echo 
+  fi
+done
+
+if [[ $EXIT_CODE == 1 ]]; then
+  exit 1
+fi
+
+mongo $CODE_TEST_HOST -u $CODE_TEST_USER -p $CODE_TEST_PASSWORD --eval "db.sessions.insertOne({ hasZip: true, githubRepo: '$REPO', duration: '$DURATION', name: '$NAME', hasPretest: true }, (err, res) => { console.log(res.ops[0]) })"

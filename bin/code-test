@@ -60,4 +60,4 @@ if [[ $EXIT_CODE == 1 ]]; then
   exit 1
 fi
 
-mongo $CODE_TEST_HOST -u $CODE_TEST_USER -p $CODE_TEST_PASSWORD --eval "db.sessions.insertOne({ hasZip: true, githubRepo: '$REPO', duration: '$DURATION', name: '$NAME', hasPretest: true }, (err, res) => { console.log(res.ops[0]) })"
+mongo $CODE_TEST_HOST -u $CODE_TEST_USER -p $CODE_TEST_PASSWORD --eval "db.sessions.insertOne({ hasZip: true, githubRepo: '$REPO', duration: '$DURATION', name: '$NAME', hasPretest: true }, (err, res) => { console.log(res.ops[0].insertedId)})"

@@ -21,6 +21,8 @@ set completeopt=noselect,menuone,preview
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'rhysd/conflict-marker.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-cucumber'
+Plugin 'godlygeek/tabular'
 " We have Yats Above...
 " Plugin 'leafgarland/typescript-vim'
 "
@@ -72,7 +74,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'typescript': ['tslint', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
+\   'typescript': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
@@ -297,6 +299,13 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss,sass set iskeyword+=-
 
+" JSDOC
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_return = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_access_descriptions = 2
+let g:jsdoc_underscore_private = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -398,7 +407,7 @@ set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
-set tw=500
+set tw=0
 
 set ai "Auto indent
 set si "Smart indent

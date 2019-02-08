@@ -28,6 +28,7 @@ brew 'youtube-dl'
 brew 'fzf'
 brew 'n'
 brew 'mongodb'
+brew 'terraform'
 
 cask '1password'
 cask 'adium'

@@ -6,6 +6,17 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/vim-lsp'
+
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript'],
+        \ })
+endif
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -23,6 +34,7 @@ Plugin 'rhysd/conflict-marker.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-cucumber'
 Plugin 'godlygeek/tabular'
+Plugin 'suan/vim-instant-markdown'
 " We have Yats Above...
 " Plugin 'leafgarland/typescript-vim'
 "
@@ -30,10 +42,11 @@ Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'mhartington/vim-angular2-snippets'
-
-Plugin 'Quramy/tsuquyomi'
-let g:tsuquyomi_single_quote_import=1
-let g:tsuquyomi_shortest_import_path=1
+ 
+" OLD VIM TYPESCRIPT PLUGIN
+" Plugin 'Quramy/tsuquyomi'
+" let g:tsuquyomi_single_quote_import=1
+" let g:tsuquyomi_shortest_import_path=1
 
 Plugin 'tpope/vim-commentary'
 
@@ -62,8 +75,8 @@ Plugin 'w0rp/ale'
 " Plugin 'gcorne/vim-sass-lint'
 "let g:syntastic_sass_checkers=["sasslint"]
 "let g:syntastic_scss_checkers=["sasslint"]
-let g:tsuquyomi_completion_preview=0
-let g:tsuquyomi_disable_quickfix=1
+" let g:tsuquyomi_completion_preview=0
+" let g:tsuquyomi_disable_quickfix=1
 "let g:syntastic_typescript_checkers=["tsuquyomi", "tslint"]
 "let g:syntastic_javascript_checkers=["eslint"]
 "let g:syntastic_enable_signs=0
@@ -124,10 +137,13 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Refactor Code Typescript
-autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
-autocmd FileType typescript nmap <buffer> <Leader>E <Plug>(TsuquyomiRenameSymbolC)
+autocmd FileType typescript nmap <buffer> <Leader>e :LspRename<CR>
+autocmd FileType typescript nmap <buffer> <Leader>E :LspRename<CR>
+autocmd FileType typescript nmap <buffer> <Leader>a :LspCodeAction<CR>
 " Show Tip
 autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
+let g:instant_markdown_slow = 1
 
 " Allow moving on columns tmux
 set ttymouse=sgr
@@ -532,6 +548,10 @@ autocmd FileType c,cpp,java,php,typescript,javascript,python,yaml,yml autocmd Bu
 autocmd FileType javascript set formatprg=prettier\ --stdin
 autocmd FileType typescript set formatprg=prettier-tslint\ --stdin
 
+" ALE Specific Items
+" TODO Use ~/.vim/ftplugin/{filetype}_mappings.vim Paths
+autocmd FileType typescript map <buffer> <C-]> :ALEGoToDefinition <CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -665,6 +685,21 @@ endfunction
 " ALE Errors
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
+
+function! FormatProject() 
+  let g:ale_run_synchronously=1 
+  if &filetype == "typescript" 
+    execute "Ack --ts '.'"
+  elseif &filetype == "javascript"
+    execute "Ack --js '.'"
+  else
+    throw()
+  endif 
+  execute "cfdo ALEFix"
+  execute "wall"
+  execute "qall"
+  let g:ale_run_synchronously=0
+endfunction
 
 
 if !exists("g:ycm_semantic_triggers")

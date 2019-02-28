@@ -137,6 +137,32 @@ install_dotfiles () {
   done
 }
 
+set_default_shell () {
+  local set_shell= 
+
+  user "Set default shell(current: $SHELL)?\n\
+    [z]sh, [b]ash, [s]h"
+  read -n 1 action
+
+  case "$action" in
+    z )
+      set_shell="zsh";;
+    s )
+      set_shell="sh";;
+    b )
+      set_shell="bash";;
+    * )
+      ;;
+  esac
+
+  if [[ ! -z "$set_shell" ]]
+  then
+    chsh -s /bin/$set_shell
+    success "Changed shell to $set_shell"
+  fi
+}
+
+set_default_shell
 setup_gitconfig
 install_dotfiles
 

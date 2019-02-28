@@ -50,6 +50,10 @@ $ZSH/homebrew/install.sh 2>&1
 echo "› brew update"
 brew update
 
+# Install oh-my-zsh
+echo "› install oh-my-"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 # Install software
 echo "› $ZSH/script/install"
 $ZSH/script/install

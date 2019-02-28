@@ -1,5 +1,6 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
+export GPG_TTY=/dev/ttys003
 
 fpath=($ZSH/functions $fpath)
 

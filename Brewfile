@@ -37,6 +37,7 @@ brew 'gnupg'
 brew 'youtube-dl'
 brew 'the_silver_searcher'
 brew 'reattach-to-user-namespace'
+brew 'kubernetes-helm'
 
 cask '1password'
 cask 'adium'

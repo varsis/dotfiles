@@ -1,4 +1,5 @@
 # shortcut to this dotfiles path is $ZSH
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
 export ZSH=$HOME/.dotfiles
 
 # Android 
@@ -6,6 +7,8 @@ export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK=$ANDROID_HOME
 export PATH=~/Library/Android/sdk/tools:$PATH
 export PATH=~/Library/Android/sdk/platform-tools:$PATH
+export PATH="$HOME/.fastlane/bin:$PATH"
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1 
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Projects

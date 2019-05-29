@@ -29,6 +29,8 @@ Plugin 'gmarik/Vundle.vim'
 " let g:ycm_autoclose_preview_window_after_completion=0
 set completeopt=noselect,menuone,preview
 
+" Table Of Contents MARKDOWN
+Plugin 'mzlogin/vim-markdown-toc' 
 " Terraform
 Plugin 'hashivim/vim-terraform'
 " Plugin 'vim-syntastic/syntastic'
@@ -109,7 +111,7 @@ map <C-n> :NERDTreeToggle<CR>
 nmap <Leader>m :NERDTreeToggle<CR>
 
 " Project Loader
-Plugin 'ternjs/tern_for_vim'
+" Plugin 'ternjs/tern_for_vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Fuzzy Search
@@ -828,5 +830,13 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 let g:instant_markdown_autostart = 0
+
+autocmd FileType sql call SqlFormatter()
+augroup end
+function SqlFormatter()
+    set noai
+    " set mappings...
+    map ,pt  :%!sqlformat --reindent --keywords upper --identifiers lower -<CR>
+endfunction
 
 filetype plugin on

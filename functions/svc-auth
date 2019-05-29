@@ -1,0 +1,5 @@
+#!/bin/sh
+
+svc-auth () {
+  kubectl get cm $1  -o jsonpath={.data.service-auth} | pbcopy
+}

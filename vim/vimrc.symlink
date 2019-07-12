@@ -168,7 +168,7 @@ let g:ale_sign_error = '✗'
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_completion_enabled = 0
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
@@ -395,6 +395,7 @@ syntax enable
 
 colorscheme basic-dark
 set background=dark
+set t_Co=256
 
 " Set extra options when running in GUI mode
 if has("gui_running")

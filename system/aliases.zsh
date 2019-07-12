@@ -23,3 +23,5 @@ alias sqlproxy="~/.scripts/cloudsql.sh"
 
 ## Clean Docker
 alias dockerclean="~/.scripts/docker-clean.sh"
+
+alias update="~/.scripts/update.sh"

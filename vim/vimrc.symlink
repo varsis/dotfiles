@@ -2,12 +2,12 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged') 
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-" Plugin 'prabirshrestha/async.vim'
-" Plugin 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
 
 " if executable('typescript-language-server')
 "     au User lsp_setup call lsp#register_server({
@@ -17,12 +17,10 @@ call vundle#begin()
 "         \ 'whitelist': ['typescript'],
 "         \ })
 " endif
-Plugin 'neoclide/coc.nvim'
+"
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " let g:ycm_show_diagnostics_ui=0
 " let g:ycm_add_preview_to_completeopt=1
 " let g:ycm_autoclose_preview_window_after_insertion=1
@@ -30,57 +28,57 @@ Plugin 'gmarik/Vundle.vim'
 set completeopt=noselect,menuone,preview
 
 " Table Of Contents MARKDOWN
-Plugin 'mzlogin/vim-markdown-toc' 
+Plug 'mzlogin/vim-markdown-toc' 
 " Terraform
-Plugin 'hashivim/vim-terraform'
-" Plugin 'vim-syntastic/syntastic'
-Plugin 'juliosueiras/vim-terraform-completion'
+Plug 'hashivim/vim-terraform'
+" Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
 
 " Autocomplete quotes, brackets, ect..
-Plugin 'HerringtonDarkholme/yats.vim'
-Plugin 'rhysd/conflict-marker.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-cucumber'
-Plugin 'godlygeek/tabular'
-Plugin 'suan/vim-instant-markdown'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'rhysd/conflict-marker.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-cucumber'
+Plug 'godlygeek/tabular'
+Plug 'suan/vim-instant-markdown'
 " We have Yats Above...
-" Plugin 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 "
-Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'mhartington/vim-angular2-snippets'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'mhartington/vim-angular2-snippets'
  
 " OLD VIM TYPESCRIPT PLUGIN
-" Plugin 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
 " let g:tsuquyomi_single_quote_import=1
 " let g:tsuquyomi_shortest_import_path=1
 
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 
-Plugin 'maksimr/vim-jsbeautify'
+Plug 'maksimr/vim-jsbeautify'
 
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'tpope/vim-haml'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'tpope/vim-haml'
 
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
-Plugin 'jelera/vim-javascript-syntax'
+Plug 'jelera/vim-javascript-syntax'
 
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 
 " JS Doc
-Plugin 'heavenshell/vim-jsdoc'
+Plug 'heavenshell/vim-jsdoc'
 
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tpope/vim-unimpaired'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-unimpaired'
 
-"" Plugin 'scrooloose/syntastic'
-Plugin 'w0rp/ale'
-" Plugin 'gcorne/vim-sass-lint'
+"" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+" Plug 'gcorne/vim-sass-lint'
 "let g:syntastic_sass_checkers=["sasslint"]
 "let g:syntastic_scss_checkers=["sasslint"]
 " let g:tsuquyomi_completion_preview=0
@@ -102,7 +100,7 @@ let g:ale_fixers = {
 \}
 
 " File Browser
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " Open Nerd Tree when no file selected
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -111,21 +109,24 @@ map <C-n> :NERDTreeToggle<CR>
 nmap <Leader>m :NERDTreeToggle<CR>
 
 " Project Loader
-" Plugin 'ternjs/tern_for_vim'
-Plugin 'christoomey/vim-tmux-navigator'
+" Plug 'ternjs/tern_for_vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Fuzzy Search
-"Plugin 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 
 " Grep / ack
-Plugin 'mileszs/ack.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'Chiel92/vim-autoformat'
+Plug 'mileszs/ack.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'Chiel92/vim-autoformat'
+
+Plug 'tpope/vim-fugitive'
+call plug#end()
 
 " This does what it says on the tin. It will check your file on open too, not just on save.
 " You might not want this, so just leave it out if you don't.
@@ -233,12 +234,10 @@ let g:tern_map_keys=1
 let g:tern_show_argument_hints='on_hold'
 
 " The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Keep Plug commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" All of your Plugs must be added before the following line
 filetype plugin indent on    " required
 
 " Make editor config work with fugitive

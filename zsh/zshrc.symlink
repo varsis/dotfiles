@@ -1,6 +1,12 @@
-# shortcut to this dotfiles path is $ZSH
+# shortcut to this dotfiles path is $ZSH_DOT_DOT
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
-export ZSH=$HOME/.dotfiles
+export ZSH="/Users/chris/.ohmy"
+export ZSH_DOT=$HOME/.dotfiles
+
+ZSH_THEME="agnoster"
+source $ZSH/oh-my-zsh.sh
+
+plugins=(git)
 
 # Android 
 export ANDROID_HOME=~/Library/Android/sdk
@@ -23,7 +29,7 @@ fi
 
 # all of our zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+config_files=($ZSH_DOT/**/*.zsh)
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}

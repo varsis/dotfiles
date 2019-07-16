@@ -40,7 +40,8 @@ Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-cucumber'
 Plug 'godlygeek/tabular'
-Plug 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+
 " We have Yats Above...
 " Plug 'leafgarland/typescript-vim'
 "

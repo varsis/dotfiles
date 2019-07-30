@@ -6,7 +6,9 @@ export ZSH_DOT=$HOME/.dotfiles
 ZSH_THEME="agnoster"
 source $ZSH/oh-my-zsh.sh
 
-plugins=(git)
+export FZF_DEFAULT_COMMAND='fd --type f'
+
+plugins=(git vi-mode)
 
 # Android 
 export ANDROID_HOME=~/Library/Android/sdk
@@ -79,3 +81,7 @@ if [ -f '/Users/chris/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/chris/Projects/alexa-experience/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/chris/Projects/alexa-experience/node_modules/tabtab/.completions/slss.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion

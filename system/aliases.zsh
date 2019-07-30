@@ -13,13 +13,13 @@ fi
 alias wget='wget -c'
 
 ## UUID Generator
-alias uuid="node ~/.scripts/uuid.js | tr -d '\n' | pbcopy"
+alias uuid="uuidgen | tr '[:upper:]' '[:lower:]' | tr -d \\n | pbcopy && pbpaste && echo"
 
 ## date Generator
-alias isodate="node ~/.scripts/date.js | tr -d '\n' | pbcopy"
+alias isodate="date -u +\"%Y-%m-%dT%H:%M:%SZ\" | tr -d \\n | pbcopy && pbpaste && echo"
 
 ## Start Proxy
-alias sqlproxy="~/.scripts/cloudsql.sh"
+alias sqlproxy="~/.bin/cloud_sql_proxy -instances=accounting-ci:us-central1:manual-test-01=tcp:5432"
 
 ## Clean Docker
 alias dockerclean="~/.scripts/docker-clean.sh"

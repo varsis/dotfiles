@@ -27,6 +27,8 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " let g:ycm_autoclose_preview_window_after_completion=0
 set completeopt=noselect,menuone,preview
 
+Plug 'janko/vim-test'
+
 " Table Of Contents MARKDOWN
 Plug 'mzlogin/vim-markdown-toc' 
 " Terraform
@@ -169,8 +171,8 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_fix_on_save = 0
+let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
@@ -558,10 +560,6 @@ autocmd FileType c,cpp,java,php,typescript,javascript,python,yaml,yml autocmd Bu
 autocmd FileType javascript set formatprg=prettier\ --stdin
 autocmd FileType typescript set formatprg=prettier-tslint\ --stdin
 
-" ALE Specific Items
-" TODO Use ~/.vim/ftplugin/{filetype}_mappings.vim Paths
-autocmd FileType typescript map <buffer> <C-]> :ALEGoToDefinition <CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -658,6 +656,10 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+let g:coc_node_path='/Users/chris/.nvm/versions/node/v10.16.0/bin/node'
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()

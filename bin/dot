@@ -52,7 +52,7 @@ brew update
 
 # Install oh-my-zsh
 echo "› install oh-my-"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || true
 
 # Install software
 echo "› $ZSH_DOT/script/install"

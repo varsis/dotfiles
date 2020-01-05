@@ -8,15 +8,18 @@ source $ZSH/oh-my-zsh.sh
 
 export FZF_DEFAULT_COMMAND='fd --type f'
 
-plugins=(git vi-mode)
+plugins=(git vi-mode yarn)
 
 # Android 
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK=$ANDROID_HOME
 export PATH=~/Library/Android/sdk/tools:$PATH
 export PATH=~/Library/Android/sdk/platform-tools:$PATH
+export PATH=$PATH:/Users/chris/Downloads/IBM-MQ-Toolkit-Mac-x64-9.1.1.0/lib64
 export PATH="$HOME/.fastlane/bin:$PATH"
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1 
+alias magiclink='xcrun simctl openurl booted'
+alias android-magiclink='adb shell am start -a android.intent.action.VIEW -d'
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Projects
@@ -83,5 +86,6 @@ if [ -f '/Users/chris/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 [[ -f /Users/chris/Projects/alexa-experience/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/chris/Projects/alexa-experience/node_modules/tabtab/.completions/slss.zsh
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion

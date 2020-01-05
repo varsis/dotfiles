@@ -35,20 +35,27 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'hashivim/vim-terraform'
 " Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
+Plug 'tpope/vim-dispatch'
 
 " Autocomplete quotes, brackets, ect..
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-cucumber'
 Plug 'godlygeek/tabular'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
+" Python
+" Plug 'plytophogy/vim-virtualenv'
+" Plug 'PieterjanMontens/vim-pipenv'
+
 " We have Yats Above...
 " Plug 'leafgarland/typescript-vim'
 "
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
+Plug 'epilande/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'mhartington/vim-angular2-snippets'
  
@@ -125,6 +132,10 @@ Plug 'junegunn/fzf.vim'
 
 " Grep / ack
 Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 Plug 'itchyny/lightline.vim'
 Plug 'Chiel92/vim-autoformat'
 
@@ -172,7 +183,7 @@ let g:ale_sign_error = '✗'
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_completion_enabled = 0
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
@@ -321,7 +332,7 @@ nmap <Leader>r :Tags<CR>
 
 let g:javascript_plugin_jsdoc = 1
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss,sass set iskeyword+=-
@@ -373,6 +384,7 @@ set incsearch
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw 
+set ttyfast
 
 " For regular expressions turn magic on
 set magic
@@ -525,6 +537,13 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 map 0 ^
 
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
 nnoremap ª :m .+1<CR>==
 nnoremap º :m .-2<CR>==
 
@@ -546,19 +565,20 @@ vnoremap º :m '<-2<CR>gv=gv
 "endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.js :call DeleteTrailingWS()
-autocmd BufWrite *.ts :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-autocmd FileType yaml,javascript,typescript,html execute  ':silent! %s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
-autocmd FileType c,cpp,java,php,typescript,javascript,python,yaml,yml autocmd BufWritePre <buffer> %s/\s\+$//e
+" func! DeleteTrailingWS()
+"   exe "normal mz"
+"   %s/\s\+$//ge
+"   exe "normal `z"
+" endfunc
+" autocmd BufWrite *.py :call DeleteTrailingWS()
+" autocmd BufWrite *.js :call DeleteTrailingWS()
+" autocmd BufWrite *.ts :call DeleteTrailingWS()
+" autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" autocmd FileType yaml,javascript,typescript,html execute  ':silent! %s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
+autocmd FileType c,cpp,java,php,typescript,typescript.tsx,javascript,python,yaml,yml autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType typescript.tsx,typescript,javascript autocmd BufWritePre <buffer> Prettier  
 autocmd FileType javascript set formatprg=prettier\ --stdin
-autocmd FileType typescript set formatprg=prettier-tslint\ --stdin
+autocmd FileType typescript,typescript.tsx set formatprg=prettier-tslint\ --stdin
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
@@ -699,7 +719,6 @@ nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
 function! FormatProject() 
-  let g:ale_run_synchronously=1 
   if &filetype == "typescript" 
     execute "Ack --ts '.'"
   elseif &filetype == "javascript"
@@ -707,10 +726,9 @@ function! FormatProject()
   else
     throw()
   endif 
-  execute "cfdo ALEFix"
+  execute "cfdo Prettier"
   execute "wall"
   execute "qall"
-  let g:ale_run_synchronously=0
 endfunction
 
 
@@ -741,6 +759,8 @@ endif
 "       \ <SID>check_back_space() ? "\<TAB>" :
 "       \ coc#refresh()
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+let test#strategy = "dispatch"
 
 function! s:check_back_space() abort
   let col = col('.') - 1

@@ -9,6 +9,9 @@
         wtf     = !$ZSH_DOT/bin/git-wtf
         rank-contributors = !$ZSH_DOT/bin/git-rank-contributors
         count   = !git shortlog -sn
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	releaselog = log --pretty=format:'* %C(yellow)%d%Creset %s %Cgreen(%aI) %C(bold blue)<%an>%Creset' --abbrev-commit
+	logrelease = log --pretty=format:'* %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%aI) %C(bold blue)(%an - %aE)%Creset' --abbrev-commit
 [color]
         diff = auto
         status = auto
@@ -37,3 +40,7 @@
 	signingkey = B46A2FBBEFC5D89549781F9B8FDC876C661E5131
 [commit]
 	gpgsign = true
+[merge]
+	tool = fugitive
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gvdiff\" \"$MERGED\"

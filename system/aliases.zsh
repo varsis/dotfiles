@@ -13,10 +13,10 @@ fi
 alias wget='wget -c'
 
 ## UUID Generator
-alias uuid="uuidgen | tr '[:upper:]' '[:lower:]' | tr -d \\n | pbcopy && pbpaste && echo"
+alias uuid="uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy && pbpaste"
 
 ## date Generator
-alias isodate="date -u +\"%Y-%m-%dT%H:%M:%SZ\" | tr -d \\n | pbcopy && pbpaste && echo"
+alias isodate="date -u +\"%Y-%m-%dT%H:%M:%SZ\" | tr -d '\n' | pbcopy && pbpaste"
 
 ## Start Proxy
 alias sqlproxy="~/.bin/cloud_sql_proxy -instances=accounting-ci:us-central1:manual-test-01=tcp:5432"

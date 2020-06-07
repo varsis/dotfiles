@@ -18,7 +18,9 @@ call plug#begin('~/.vim/plugged')
 "         \ })
 " endif
 "
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'puremourning/vimspector', {'dir': '~/.vim/pack', 'do': './install_gadget.py --all --disable-tcl'}
 
 " Plug 'Valloric/YouCompleteMe'
 " let g:ycm_show_diagnostics_ui=0
@@ -56,6 +58,7 @@ Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'epilande/vim-react-snippets'
+Plug 'joaohkfaria/vim-jest-snippets'
 Plug 'honza/vim-snippets'
 Plug 'mhartington/vim-angular2-snippets'
  
@@ -259,6 +262,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 set clipboard=unnamed
 set number
+set relativenumber
 set colorcolumn=80
 set mouse=a
 set autoread
@@ -325,10 +329,13 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+command!      -bang -nargs=? SSymbol call CocList('symbols', '--input', <q-args>, <bang>0)
+
 " Quick Search!
 nmap ; :Buffers<CR>
-nmap <Leader>f :Files<CR>
+nmap <Leader>f :GFiles<CR>
 nmap <Leader>r :Tags<CR>
+nmap <Leader>s :SSymbol<CR>
 
 let g:javascript_plugin_jsdoc = 1
 filetype plugin on

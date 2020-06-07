@@ -8,7 +8,7 @@ source $ZSH/oh-my-zsh.sh
 
 export FZF_DEFAULT_COMMAND='fd --type f'
 
-plugins=(git vi-mode yarn)
+plugins=(git vi-mode yarn zsh-completion)
 
 # Android 
 export ANDROID_HOME=~/Library/Android/sdk
@@ -18,6 +18,7 @@ export PATH=~/Library/Android/sdk/platform-tools:$PATH
 export PATH=$PATH:/Users/chris/Downloads/IBM-MQ-Toolkit-Mac-x64-9.1.1.0/lib64
 export PATH="$HOME/.fastlane/bin:$PATH"
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1 
+export TESTING=test
 alias magiclink='xcrun simctl openurl booted'
 alias android-magiclink='adb shell am start -a android.intent.action.VIEW -d'
 
@@ -68,6 +69,9 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
+bindkey -v
+bindkey '^R' history-incremental-pattern-search-backward
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/chris/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/chris/Downloads/google-cloud-sdk/path.zsh.inc'; fi

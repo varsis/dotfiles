@@ -1,14 +1,14 @@
+zmodload zsh/zprof
 # shortcut to this dotfiles path is $ZSH_DOT_DOT
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
-export ZSH="/Users/chris/.ohmy"
+plugins=(git vi-mode yarn zsh-completions)
+export ZSH="$HOME/.ohmy"
 export ZSH_DOT=$HOME/.dotfiles
 
 ZSH_THEME="agnoster"
 source $ZSH/oh-my-zsh.sh
 
 export FZF_DEFAULT_COMMAND='fd --type f'
-
-plugins=(git vi-mode yarn zsh-completion)
 
 # Android 
 export ANDROID_HOME=~/Library/Android/sdk
@@ -69,6 +69,7 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+bindkey -e
 
 bindkey -v
 bindkey '^R' history-incremental-pattern-search-backward
@@ -90,6 +91,6 @@ if [ -f '/Users/chris/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 [[ -f /Users/chris/Projects/alexa-experience/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/chris/Projects/alexa-experience/node_modules/tabtab/.completions/slss.zsh
 
 export NVM_DIR="$HOME/.nvm"
-export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+zprof

@@ -37,7 +37,7 @@
 [gpg]
 	program = /usr/local/bin/gpg
 [user]
-	signingkey = B46A2FBBEFC5D89549781F9B8FDC876C661E5131
+	signingkey = 06065BE5040779D2
 [commit]
 	gpgsign = true
 [merge]

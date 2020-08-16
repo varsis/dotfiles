@@ -19,6 +19,16 @@ call plug#begin('~/.vim/plugged')
 " endif
 "
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Coc Plugins, usually installed using CocInstall
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-jedi', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-sql', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'puremourning/vimspector', {'dir': '~/.vim/pack', 'do': './install_gadget.py --all --disable-tcl'}
 
@@ -686,7 +696,7 @@ endfunction
 
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
-let g:coc_node_path='/Users/chris/.nvm/versions/node/v10.16.0/bin/node'
+let g:coc_node_path='/usr/local/bin/node'
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
